@@ -352,6 +352,7 @@ DEPENDENCIES
   rails (~> 7.1.6)
   react_on_rails_pro (= 16.4.0.rc.5)
   selenium-webdriver
+  shakapacker (= 9.5)
   sprockets-rails
   sqlite3 (>= 1.4)
   stimulus-rails
