@@ -1,24 +1,28 @@
-# README
+# React on Rails Pro 16.4.0.rc.5 Demo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Sample Rails app generated with:
 
-Things you may want to cover:
+- `react_on_rails_pro` gem `16.4.0.rc.5`
+- `react-on-rails-pro` npm package `16.4.0-rc.5`
+- `react-on-rails-pro-node-renderer` npm package `16.4.0-rc.5`
 
-* Ruby version
+## Quick Start
 
-* System dependencies
+```bash
+bundle install
+npm install
+bundle exec rails db:prepare
+bin/shakapacker
+bin/dev
+```
 
-* Configuration
+Then open <http://localhost:3000/hello_world>.
 
-* Database creation
+## Known Pitfalls
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- The generator requires a clean git working tree; commit or stash first.
+- If `/hello_world` raises `No such file or directory ... ssr-generated/server-bundle.js`, run `bin/shakapacker`.
+- If port 3000 is busy, use `bin/dev` with a procfile update or free the existing process first.
+- For pre-release versions, gem and npm formats differ:
+  - gem: `16.4.0.rc.5`
+  - npm: `16.4.0-rc.5`
