@@ -17,8 +17,12 @@ FileUtils.chdir APP_ROOT do
   system! "gem install bundler --conservative"
   system("bundle check") || system!("bundle install")
 
-  # Install JavaScript dependencies
-  system!("npm install")
+  # Install JavaScript dependencies without mutating the lockfile.
+  if File.exist?("package-lock.json")
+    system!("npm ci")
+  else
+    system!("npm install")
+  end
 
   # puts "\n== Copying sample files =="
   # unless File.exist?("config/database.yml")
