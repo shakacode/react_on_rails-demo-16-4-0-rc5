@@ -2,6 +2,7 @@
 // https://github.com/shakacode/react_on_rails_demo_ssr_hmr/blob/master/config/webpack/clientWebpackConfig.js
 
 const commonWebpackConfig = require('./commonWebpackConfig');
+const { RSCWebpackPlugin } = require('react-on-rails-rsc/WebpackPlugin');
 
 const configureClient = () => {
   const clientConfig = commonWebpackConfig();
@@ -11,6 +12,9 @@ const configureClient = () => {
   // error shows referring to window["webpackJsonp"]. That is because the
   // client config is going to try to load chunks.
   delete clientConfig.entry['server-bundle'];
+
+  // Add React Server Components plugin for client bundle
+  clientConfig.plugins.push(new RSCWebpackPlugin({ isServer: false }));
 
   return clientConfig;
 };

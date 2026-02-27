@@ -7,6 +7,7 @@ const commonWebpackConfig = require('./commonWebpackConfig');
 const bundler = config.assets_bundler === 'rspack'
   ? require('@rspack/core')
   : require('webpack');
+const { RSCWebpackPlugin } = require('react-on-rails-rsc/WebpackPlugin');
 
 function extractLoader(rule, loaderName) {
   if (!Array.isArray(rule.use)) return null;
@@ -16,7 +17,8 @@ function extractLoader(rule, loaderName) {
   });
 }
 
-const configureServer = () => {
+// rscBundle parameter: when true, skips RSCWebpackPlugin (RSC bundle doesn't need it)
+const configureServer = (rscBundle = false) => {
   // We need to use "merge" because the clientConfigObject, EVEN after running
   // toWebpackConfig() is a mutable GLOBAL. Thus any changes, like modifying the
   // entry value will result in changing the client config!
@@ -51,6 +53,11 @@ const configureServer = () => {
   serverWebpackConfig.optimization = {
     minimize: false,
   };
+  // Add RSC plugin for server bundle (handles client component references)
+  // Skip for RSC bundle - it doesn't need RSCWebpackPlugin
+  if (!rscBundle) {
+    serverWebpackConfig.plugins.push(new RSCWebpackPlugin({ isServer: true }));
+  }
   serverWebpackConfig.plugins.unshift(new bundler.optimize.LimitChunkCountPlugin({ maxChunks: 1 }));
 
   // Custom output for the server-bundle

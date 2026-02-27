@@ -43,7 +43,7 @@ default: &default
 
   # Location for private server-side bundles (e.g., for SSR)
   # These bundles are not served publicly, unlike public_output_path
-  # private_output_path: ssr-generated
+  private_output_path: ssr-generated
 
   # Additional paths webpack should look up modules
   # ['app/assets', 'engine/foo/app/assets']
