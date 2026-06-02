@@ -77,6 +77,21 @@ This is the easiest way to run the full Pro + RSC development workflow.
 - Lockfile changed after setup:
   - Use `bin/setup` (not `npm install`) for consistent installs.
 
+## Control Plane Flow
+
+This repo now includes `cpflow` scaffolding for review apps, automatic staging
+deploys, and manual promotion to production:
+
+- `.controlplane/` defines staging, review, and production apps plus a
+  persistent `/rails/storage` volume for SQLite and uploaded files
+- `.github/workflows/cpflow-*.yml` provides opt-in review apps, staging deploys,
+  production promotion, and cleanup
+- the production Docker image now includes Node so the same image can both
+  precompile assets and run the React on Rails Pro node renderer
+
+See `.controlplane/readme.md` for the expected Control Plane secrets, app names,
+and GitHub variables.
+
 ## Learn More
 
 - React on Rails docs:

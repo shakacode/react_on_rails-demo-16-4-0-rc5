@@ -1,0 +1,39 @@
+kind: gvc
+name: {{APP_NAME}}
+spec:
+  env:
+    - name: PORT
+      value: "3000"
+    - name: RAILS_ENV
+      value: production
+    - name: RAILS_LOG_LEVEL
+      value: info
+    - name: RAILS_SERVE_STATIC_FILES
+      value: "true"
+    - name: REACT_RENDERER_URL
+      value: http://renderer.{{APP_NAME}}.cpln.local:3800
+    - name: RENDERER_HOST
+      value: "0.0.0.0"
+    - name: RENDERER_PORT
+      value: "3800"
+    - name: RENDERER_WORKERS_COUNT
+      value: "1"
+    - name: RENDERER_SERVER_BUNDLE_CACHE_PATH
+      value: /rails/tmp/.node-renderer-bundles
+    # Review apps run pull request code. Values mounted through cpln://secret
+    # become readable by that code after the workload starts, so review-app
+    # secret references must use review/staging-specific values.
+    # Required runtime secret:
+    # - name: SECRET_KEY_BASE
+    #   value: cpln://secret/react-on-rails-demo-16-4-0-rc5-secrets/SECRET_KEY_BASE
+    #
+    # Optional renderer secret:
+    # - name: RENDERER_PASSWORD
+    #   value: cpln://secret/react-on-rails-demo-16-4-0-rc5-secrets/RENDERER_PASSWORD
+    #
+    # Optional Action Cable Redis connection:
+    # - name: REDIS_URL
+    #   value: redis://redis.{{APP_NAME}}.cpln.local:6379/1
+  staticPlacement:
+    locationLinks:
+      - {{APP_LOCATION_LINK}}
