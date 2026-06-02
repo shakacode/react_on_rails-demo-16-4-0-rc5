@@ -20,6 +20,9 @@ spec:
       value: "1"
     - name: RENDERER_SERVER_BUNDLE_CACHE_PATH
       value: /rails/tmp/.node-renderer-bundles
+    # Review apps run pull request code. Values mounted through cpln://secret
+    # become readable by that code after the workload starts, so review-app
+    # secret references must use review/staging-specific values.
     # Required runtime secret:
     # - name: SECRET_KEY_BASE
     #   value: cpln://secret/react-on-rails-demo-16-4-0-rc5-secrets/SECRET_KEY_BASE
